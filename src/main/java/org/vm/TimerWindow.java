@@ -23,29 +23,17 @@ import java.awt.event.KeyEvent;
 
 /**
  * @author Vladimir Metodiev
+ * @version 1.1
  */
 
 public class TimerWindow extends JFrame {
     private final Timer timer = new Timer(1000, taskPerformer());
-    private static long time = 0L;
-    private static final JLabel DISPLAY = new JLabel(String.valueOf(time));
-    private static final JButton START = new JButton("Start");
-    private static final JButton STOP = new JButton("Stop");
-    private static final JButton CLEAN = new JButton("Clean");
-    private static final JButton ENTER = new JButton("Enter");
-
-    static {
-        DISPLAY.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
-        DISPLAY.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 204)));
-        DISPLAY.setHorizontalAlignment(JLabel.CENTER);
-        START.setPreferredSize(new Dimension(100, 32));
-        START.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-        STOP.setPreferredSize(new Dimension(100, 32));
-        STOP.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-        CLEAN.setPreferredSize(new Dimension(100, 32));
-        CLEAN.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-        ENTER.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
-    }
+    private long time = 0L;
+    private final JLabel DISPLAY = new JLabel(String.valueOf(time));
+    private final JButton START = new JButton("Start");
+    private final JButton STOP = new JButton("Stop");
+    private final JButton CLEAN = new JButton("Clean");
+    private final JButton ENTER = new JButton("Enter");
 
     public TimerWindow() throws HeadlessException {
         super("Timer");
@@ -71,6 +59,9 @@ public class TimerWindow extends JFrame {
         constraints.gridy = 0;
         constraints.gridx = 0;
         constraints.gridwidth = 3;
+        DISPLAY.setFont(new Font(Font.DIALOG, Font.BOLD, 30));
+        DISPLAY.setBorder(BorderFactory.createLineBorder(new Color(51, 51, 204)));
+        DISPLAY.setHorizontalAlignment(JLabel.CENTER);
         content.add(DISPLAY, constraints);
 
         constraints.insets = new Insets(6, 6, 6, 6);
@@ -78,16 +69,22 @@ public class TimerWindow extends JFrame {
         constraints.gridy = 1;
         constraints.gridx = 0;
         constraints.gridwidth = 1;
+        START.setPreferredSize(new Dimension(100, 32));
+        START.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
         START.addActionListener(ae -> timer.start());
         START.setMnemonic(KeyEvent.VK_R);
         content.add(START, constraints);
 
         constraints.gridx = 1;
+        STOP.setPreferredSize(new Dimension(100, 32));
+        STOP.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
         STOP.addActionListener(ae -> timer.stop());
         STOP.setMnemonic(KeyEvent.VK_F);
         content.add(STOP, constraints);
 
         constraints.gridx = 2;
+        CLEAN.setPreferredSize(new Dimension(100, 32));
+        CLEAN.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
         CLEAN.addActionListener(ae -> {
             time = 0L;
             DISPLAY.setText(String.valueOf(0L));
@@ -98,6 +95,7 @@ public class TimerWindow extends JFrame {
         constraints.gridy = 2;
         constraints.gridx = 0;
         constraints.gridwidth = 3;
+        ENTER.setFont(new Font(Font.DIALOG, Font.BOLD, 16));
         ENTER.addActionListener(ae -> {
             if (timer.isRunning()) {
                 timer.stop();
@@ -125,7 +123,7 @@ public class TimerWindow extends JFrame {
         };
     }
 
-    private static final class EnterDialog extends JDialog {
+    private class EnterDialog extends JDialog {
 
         EnterDialog() {
             initComponents();
@@ -184,5 +182,3 @@ public class TimerWindow extends JFrame {
         }
     }
 }
-
-
